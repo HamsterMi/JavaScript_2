@@ -5,15 +5,12 @@ body {
 
 .header {
   width: 100%;
-  padding: 20px 60px 90px 60px;
+  padding: 40px 60px 50px 60px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: #eaeaeb;
-  background-image: url(img/header-background.jpg);
-  background-position: bottom right 250px;
-  background-repeat: no-repeat;
+  background-color: rgb(255, 105, 0);
 }
 
 .logo-link {
@@ -21,15 +18,16 @@ body {
   align-items: flex-end;
   text-decoration: none;
   filter: brightness(100%);
+  width: 100%;
+  justify-content: space-around;
 }
 
 .logo-link:hover {
   filter: brightness(110%);
 }
 .logo-link__icon {
-  fill: url(#my-gradient) rgb(77, 209, 181);
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: 200px;
 }
 
 .logo-link:active .logo-link__icon {
@@ -38,101 +36,93 @@ body {
 
 .logo-link__title {
   text-transform: capitalize;
-  background: linear-gradient(#41dfd0, #ee83ef);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-style: oblique;
-  font-size: 80px;
+  color: rgb(76, 36, 29);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 800;
+  /*  font-style: oblique; */
+  font-size: 140px;
 }
 
 .logo-link:active .logo-link__title {
-  background: #8982c9;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.cart-button {
-  border: none;
-  background-color: inherit;
-  outline: none;
-  cursor: pointer;
-  padding: 5px 20px;
-  align-self: center;
-}
-
-.cart-button:active {
-  transform: translateY(1px);
-}
-.nav__icon {
-  fill: url(#my-gradient) rgb(77, 209, 181);
-  width: 50px;
-  height: 50px;
-}
-
-.nav__icon:hover {
-  fill: #c982bf;
+  color: #ffce56;
 }
 
 main {
   width: 100%;
-}
-
-.goods-list {
-  display: flex;
-  padding: 50px 100px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.goods-item {
-  border: 1px solid transparent;
-  padding: 15px;
+  padding: 60px 60px 50px 60px;
   box-sizing: border-box;
-  margin-bottom: 15px;
-  width: 40%;
-  margin: 1%;
-  font-family: Arial, Helvetica, sans-serif;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
   justify-content: center;
-  filter: brightness(90%);
+  align-items: center;
+  flex-direction: column;
 }
 
-.goods-item:hover {
-  filter: brightness(100%);
-}
-.goods-item:active {
-  filter: brightness(100%);
-}
-
-.goods-item__text-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 30px;
-  justify-content: space-between;
-  background-color: white;
-}
-
-.goods-item__img {
-  width: 400px;
-  height: 400px;
-  background-color: #eaeaeb;
-}
-
-.goods-item__title {
-  font-weight: 200;
-  font-size: 20px;
+.button {
+  text-decoration: none;
+  padding: 20px;
+  margin: 80px;
+  background-color: rgb(255, 105, 0);
+  border-radius: 29px;
+  border: 0px;
+  outline: none;
+  box-shadow: 0px 3px 0px #80645f;
   text-transform: uppercase;
-  color: #a6aae2;
+  color: rgb(76, 36, 29);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  width: 30%;
 }
 
-.goods-item__text {
-  font-weight: 600;
+
+
+.start-button:hover {
+  background-color: #ffce56;
+}
+
+.start-button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+legend {
+  text-align: center;
+}
+
+.burger-form {
+  display: none;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  color: rgb(76, 36, 29);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 400;
   font-size: 20px;
-  color: #79716e;
+}
+
+.burger-form__fieldset {
+  border: 1px dotted gray;
+  width: 50%;
+}
+
+.total {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  width: 30%;
+}
+
+.total-text {
+  width: 100%;
+  padding: 10px;
+
+  border: 1px solid #000;
+}
+
+.button-count {
+  width: 100%;
+  margin: 20px;
 }

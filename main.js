@@ -1,36 +1,110 @@
 "use strict";
+function init() {
+  const CAFE = new Cafe();
+  CAFE.render();
 
-const GOODS = [
-  { title: "Shirt", price: 150 },
-  { title: "Socks", price: 50 },
-  { title: "Jacket", price: 350 },
-  { title: "Shoes", price: 250 },
-  {},
-  {},
-  {},
-  {}
+  const HAMBURGER = new Hamburger();
+  HAMBURGER.render();
+
+  /* HAMBURGER.calculateCalories(); */
+}
+
+window.onload = init;
+
+const BREAD = [
+  { title: "Большой", price: 100, calories: 40 },
+  { title: "Маленький", price: 50, calories: 20 }
 ];
 
-//добавлены по умолчанию аргументы для функции renderGoodsItem
-const renderGoodsItem = (title = "product", price = 0) =>
-  `<div class="goods-item"><img src="img/${title}.png" alt="${title}" width="400" height="400" class="goods-item__img"/> 
-  <div class ="goods-item__text-wrap">
-  <h3 class="goods-item__title">${title}</h3>
-  <p class="goods-item__text">${price}</p></div></div>`;
+const STUFFING = [
+  { title: "Говядина", price: 60, calories: 30 },
+  { title: "Курица", price: 50, calories: 25 },
+  { title: "Рыба", price: 40, calories: 25 },
+  { title: "Сыр", price: 10, calories: 20 },
+  { title: "Салат", price: 20, calories: 5 },
+  { title: "Картофель", price: 15, calories: 10 },
+  { title: "Помидор", price: 20, calories: 5 }
+];
 
-//добавлен по умолчанию аргумент для функции renderGoodsList
-const renderGoodsList = (list = GOODS) => {
-  const goodsList = list.map(item => renderGoodsItem(item.title, item.price));
-  document.querySelector(".goods-list").innerHTML = goodsList.join(" ");
-};
-const goodsList = renderGoodsList();
+const SAUCES = [
+  { title: "Приправа", price: 15, calories: 0 },
+  { title: "Майонез", price: 20, calories: 5 },
+  { title: "Горчица", price: 10, calories: 3 }
+];
 
-/*  упростить код можно так: 
-const renderGoodsList = (list = GOODS) => {
-  document.querySelector(".goods-list").innerHTML = list.map(item => renderGoodsItem(item.title, item.price)).join(" ");
-}; */
-//но это вопросы вкуса и привычки, я полагаю
+class Hamburger {
+  constructor() {
+    /* this.size = document.querySelector("input[class='size_radio']:checked"); */
+    /* this.stuffing = [];
+    this.sauces = []; */
+  }
+  render() {
+    let countButton = document.querySelector(".button-count");
+    countButton.addEventListener("click", this.calculate);
+  }
+  calculate() {
+    //рассчитываем булку
+    let breadItem = document.querySelector("input[class='size_radio']:checked");
+    let breadPrice = "";
+    let breadCalories = "";
+    BREAD.forEach(item => {
+      if (item.title == breadItem.value) {
+        breadPrice = item.price;
+        breadCalories = item.calories;
+      }
+    });
 
-// Вопрос  №3. Сейчас после каждого товара на странице выводится запятая. Из-за чего это происходит?Как это исправить?
-// После каждого товара выводилась запятая, поскольку метод map() возвращяет массив и страндартный разделитель массива - запятая*/
-// Метод join() позволяет преобразовать массив в строкуи указать разделитель. Я использовала "пробел".
+    //рассчитываем начинки
+    let stuffingItems = document.querySelectorAll(
+      "input[class='stuffing-checkbox']:checked"
+    );
+    let stuffingPrice = 0;
+    let stuffingCalories = 0;
+    stuffingItems.forEach(stuf => {
+      STUFFING.forEach(item => {
+        if (item.title == stuf.value) {
+          stuffingPrice += item.price;
+          stuffingCalories += item.calories;
+        }
+      });
+    });
+
+    //рассчитываем coусы
+    let saucesItems = document.querySelectorAll(
+      "input[class='sauces-checkbox']:checked"
+    );
+
+    let saucePrice = 0;
+    let sauceCalories = 0;
+    saucesItems.forEach(sauce => {
+      SAUCES.forEach(item => {
+        if (item.title == sauce.value) {
+          saucePrice += item.price;
+          sauceCalories += item.calories;
+        }
+      });
+    });
+
+    let totalPrice = breadPrice + stuffingPrice + saucePrice;
+    let totalCalories = breadCalories + stuffingCalories + sauceCalories;
+
+    document.querySelector(".price-text").innerHTML += totalPrice;
+    document.querySelector(".calories-text").innerHTML += totalCalories;
+  }
+  calculateCalories() {}
+}
+
+class Cafe {
+  constructor(hamburger) {
+    this.makeOrder = this.makeOrder.bind(this);
+  }
+  render() {
+    let startButton = document.querySelector(".start-button");
+    startButton.addEventListener("click", this.makeOrder);
+  }
+  makeOrder() {
+    event.target.style.display = "none";
+    document.querySelector(".burger-form").style.display = "flex";
+    document.querySelector(".total").style.display = "flex";
+  }
+}
