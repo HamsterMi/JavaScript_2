@@ -1,15 +1,7 @@
 "use strict";
 
-const GOODS = [
-  { title: "Shirt", price: 150 },
-  { title: "Socks", price: 50 },
-  { title: "Jacket", price: 350 },
-  { title: "Shoes", price: 250 },
-  {},
-  {},
-  {},
-  {}
-];
+const API_URL =
+  "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses";
 
 class GoodsItem {
   constructor(title = "product", price = 0) {
@@ -28,69 +20,57 @@ class GoodsItem {
 
 class GoodsList {
   constructor() {
-    this.goods = [];
   }
-  // заполнение списка товаров
   fetchGoods() {
-    this.goods = GOODS;
+    return this.makeGETRequest(`${API_URL}/catalogData.json`).then(
+      responseText => {
+        this.goods = JSON.parse(responseText);
+      }
+    );
   }
-  //вывод списка товаров
+
   render() {
     let listHtml = "";
     this.goods.forEach(good => {
-      const goodItem = new GoodsItem(good.title, good.price);
+      const goodItem = new GoodsItem(good.product_name, good.price);
       listHtml += goodItem.render();
     });
     document.querySelector(".goods-list").innerHTML = listHtml;
   }
 
-  countSumm() {
-    let summArr = 0;
-    this.goods.forEach(good => {
-      good.price = good.price ? good.price : 0;
-      summArr += good.price;
-    });
+  makeGETRequest(url) {
+    return new Promise((resolve, reject) => {
+      let xhr = window.XMLHttpRequest
+        ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
 
-    document.querySelector(".total-price").innerHTML = `Cуммарная стоимость: ${summArr}$`;
-    console.log(`Cуммарная стоимость "${summArr}$"`);
+      xhr.open("GET", url, true);
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status != 200) {
+            let error = new Error(xhr.statusText);
+            error.code = xhr.status;
+            reject(error);
+          } else {
+            resolve(xhr.responseText);
+          }
+        }
+      };
+
+      xhr.send();
+    });
   }
 }
 
-const list = new GoodsList();
-list.fetchGoods();
-list.render();
-list.countSumm();
+function init() {
+  const list = new GoodsList();
 
-//список корзины
-class GoodsBasket {
-  constructor() {}
-
-  //посчитать количеcтво товаров в корзине
-  countQuantity() {}
-
-  //посчитать цену товаров
-  countSumm() {}
-
-  //очистить корзину
-  clearBasket() {}
-
-  //оформить заказ()
-  makeOrder() {}
+  list.fetchGoods().then(
+    () => {
+      list.render();
+    },
+    error => alert(`${error}`)
+  );
 }
-
-//элемент корзины
-class GoodsBasketItem {
-  constructor() {}
-
-  //добавить в корзину товар
-  addItems() {}
-
-  //изменить количество товара
-  changeQuantity() {}
-
-  //удалить товар из корзины
-  deleteItem() {}
-
-  //посчитать итоговую цену товара(с учетом количества)
-  countSumm() {}
-}
+window.onload = init;
