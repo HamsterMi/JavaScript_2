@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>eShop</title>
     <script src="main.js" async></script>
     <link rel="stylesheet" href="main.css" />
@@ -17,7 +17,6 @@
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
         >
-          <!--   <use xlink:href="#symbol-id"></use> -->
           <linearGradient
             id="my-gradient"
             gradientUnits="userSpaceOnUse"
@@ -35,7 +34,10 @@
         </svg>
         <span class="logo-link__title">Store</span>
       </a>
-      
+      <form class="search-form">
+        <input class="goods-search" type="text"/>
+        <button class="search-button button" type="submit">Искать</button>
+      </form>
       <button class="cart-button" type="button">
         <svg
           class="nav__icon"
@@ -63,7 +65,9 @@
       </button>
     </header>
     <main>
-      <div class="goods-list"></div>
+      <div class="container">
+        <div class="goods-list"></div>
+      </div>
     </main>
   </body>
 </html>
