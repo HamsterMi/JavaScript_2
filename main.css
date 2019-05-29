@@ -15,7 +15,6 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   background-color: #eaeaeb;
-  /*   background-image: url(img/header-background.jpg); */
   background-position: bottom right 250px;
   background-repeat: no-repeat;
 }
@@ -111,10 +110,10 @@ main {
 }
 
 .goods-item:hover {
-  filter: brightness(100%);
+  filter: brightness(95%);
 }
 .goods-item:active {
-  filter: brightness(100%);
+  filter: brightness(95%);
 }
 
 .goods-item__wrap {
@@ -157,7 +156,6 @@ main {
 
 .cart {
   position: absolute;
-  display: none;
   background-color: #d9b2de;
   border: 1px solid #d9b2de;
   border-radius: 30px;
@@ -170,6 +168,16 @@ main {
   font-weight: 200;
   font-size: 20px;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .button {
   border: 1px solid rgb(201, 189, 189);
   border-radius: 5px;
