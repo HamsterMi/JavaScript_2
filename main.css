@@ -168,7 +168,12 @@ main {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 200;
   font-size: 20px;
-  z-index: 1
+  z-index: 1;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .fade-enter-active,
@@ -186,9 +191,10 @@ main {
   background-color: white;
   cursor: pointer;
   outline: none;
+  padding: 10px 10px;
 }
 .button:hover {
-  background-color: #c982bf;
+  background-color: rgb(77, 209, 181);
 }
 .button:active {
   transform: translateY(1px);

@@ -28,8 +28,18 @@ Vue.component("goods-item", {
 
 Vue.component("cart", {
   props: ["visible", "goods"],
-  template: `
-  <div class="cart" v-if="visible">Ваша корзина еще пуста</div>`
+  template:
+    '<div class="cart" v-if="visible"><slot name="product_name"></slot><cart-item v-for="good in goods" :key="good.id" :good="good"></cart-item></div>'
+});
+Vue.component("cart-item", {
+  props: ["good"],
+  template:
+    '<div class="cart-item"><h3>{{good.product_name}}</h3><p>{{good.price}}</p><button class="button" :id="good.id" @click="remove(event)">x</button></div>',
+  methods: {
+    remove() {
+      app.removeFromCart(event.target.id);
+    }
+  }
 });
 
 Vue.component("search-form", {
