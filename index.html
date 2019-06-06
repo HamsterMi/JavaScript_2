@@ -36,16 +36,9 @@
           </svg>
           <span class="logo-link__title">Store</span>
         </a>
-        <form class="search-form">
-          <input class="goods-search" type="text" v-model="searchLine" />
-          <button
-            class="search-button button"
-            type="button"
-            @click="filterGoods"
-          >
-            Искать
-          </button>
-        </form>
+        <search-form @submit="filterGoods"></search-form>
+        <cart :visible="isVisibleCart"></cart>
+        
         <button class="cart-button" type="button" @click="showCart">
           <svg
             class="nav__icon"
@@ -71,25 +64,22 @@
             />
           </svg>
         </button>
+        <transition name="fade">
+          <cart :visible="isVisibleCart"></cart>
+        </transition>
       </header>
       <main>
         <div class="container">
-          <div class="goods-list" v-if="filteredGoods.length>0">
-            <div class="goods-item" v-for="good in filteredGoods">
-              <div class="goods-item__wrap">
-                <h3 class="goods-item__title">{{ good.product_name }}</h3>
-                <p class="goods-item__text">{{ good.price }}</p>
-              </div>
-            </div>
-          </div>
+          <goods-list
+            :goods="filteredGoods"
+            :searchLine="searchLine"
+            v-if="filteredGoods.length>0"
+          >
+          </goods-list>
           <div v-else>
             <p>Нет данных</p>
           </div>
-          <transition name="fade">
-            <div class="cart" v-show="isVisibleCart">
-              Ваша корзина еще пуста
-            </div>
-          </transition>
+
         </div>
       </main>
     </div>
