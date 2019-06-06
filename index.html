@@ -65,7 +65,9 @@
           </svg>
         </button>
         <transition name="fade">
-          <cart :visible="isVisibleCart"></cart>
+
+          <cart :goods="cart" :visible="isVisibleCart"></cart>
+
         </transition>
       </header>
       <main>
@@ -79,7 +81,6 @@
           <div v-else>
             <p>Нет данных</p>
           </div>
-
         </div>
       </main>
     </div>
