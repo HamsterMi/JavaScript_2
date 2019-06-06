@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>eShop</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="main.js" async></script>
+    <script src="scripts/main.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
@@ -76,6 +76,7 @@
             :goods="filteredGoods"
             :searchLine="searchLine"
             v-if="filteredGoods.length>0"
+            @add="addToCart"
           >
           </goods-list>
           <div v-else>
